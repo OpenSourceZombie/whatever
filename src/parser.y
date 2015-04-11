@@ -37,14 +37,14 @@
 root : stmts { rootBlock = $1; }
 		;
 		
-stmts : stmt { $$ = new Block(); $$->statements.push_back($<stmt>1); }
-	  | stmts stmt { $1->statements.push_back($<stmt>2); }
+stmts : stmt TEXCL { $$ = new Block(); $$->statements.push_back($<stmt>1); }
+	  | stmts stmt TEXCL { $1->statements.push_back($<stmt>2); }
 	  ;
 
 stmt : var_decl 
      ;
 
-var_decl : TSET ident TTYPE ident TEXCL { $$ = new VariableDeclaration(*$4, *$2); }
+var_decl : TSET ident TTYPE ident  { $$ = new VariableDeclaration(*$4, *$2); }
 		 ;
 ident : TIDENTIFIER { $$ = new Identifier(*$1); delete $1; }
 	  ;
