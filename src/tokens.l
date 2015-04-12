@@ -21,6 +21,7 @@
 "="						        return TOKEN(TEQUAL);
 "!" 							return TOKEN(TEXCL);
 ":" 							return TOKEN(TTYPE);
+"@" 							return TOKEN(TASS);
 .                       		printf("Unknown token!\n"); yyterminate();
 
 %%

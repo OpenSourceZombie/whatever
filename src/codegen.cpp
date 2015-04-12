@@ -94,4 +94,14 @@ Value* VariableDeclaration::codeGen(CodeGenContext& context)
 	context.locals()[id.name] = alloc;
 	return alloc;
 }
+Value* VariableAssignment::codeGen(CodeGenContext& context)
+{
+    std::cout << "Creating assignment for " << lhs.name << endl;
+    if (context.locals().find(lhs.name) == context.locals().end()) {
+        std::cerr << "undeclared variable " << lhs.name << endl;
+        return NULL;
+    }
+    return new StoreInst(rhs.codeGen(context), context.locals()[lhs.name], false, context.currentBlock());
+}
+
 

@@ -58,3 +58,11 @@ public:
 	virtual llvm::Value* codeGen(CodeGenContext& context);
 };
 
+class VariableAssignment : public Statement {
+public: 
+		Identifier& lhs;
+		Expression&  rhs;
+		VariableAssignment(Identifier& lhs, Expression& rhs) :
+			lhs(lhs), rhs(rhs) {  }
+		virtual llvm::Value* codeGen(CodeGenContext& context);
+};

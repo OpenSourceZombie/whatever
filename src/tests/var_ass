@@ -1,0 +1,4 @@
+set x : int !
+x @ 223 !
+set z : double !
+z @ 5.123 !
