@@ -30,5 +30,20 @@ x @ 12 ! //variable assignment example
 
 set x : int @ 12 ! //variable initialization 
 ```
+## Requirements ##
+1. flex
+2. bison
+3. llvm libraries
+4. make 
+
+## Build instructions ##
+```bash
+git clone https://github.com/OpenSourceZombie/whatever.git
+cd whatever/src
+make 
+#run tests
+make test
+```
+
 ## Why? ##
 Because.
