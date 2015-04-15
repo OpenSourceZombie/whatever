@@ -16,7 +16,7 @@ Simple compiler for a toy language using llvm framework
 * ~~Design a weird syntax.~~
 * ~~Variables declaration.~~
 * ~~Variables assignment.~~
-* Variables initialization.
+* ~~Variables initialization.~~
 * Mathematical Expressions.
 * Add a builtin print function ex. echo/print.
 * Functions.
@@ -27,6 +27,8 @@ Simple compiler for a toy language using llvm framework
 set x : int !  //variable declaration example
 
 x @ 12 ! //variable assignment example 
+
+set x : int @ 12 ! //variable initialization 
 ```
 ## Why? ##
 Because.

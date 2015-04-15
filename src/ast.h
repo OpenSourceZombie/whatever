@@ -52,9 +52,18 @@ class VariableDeclaration : public Statement {
 public:
 	const Identifier& type;
 	Identifier& id;
-	Expression *assignmentExpr;
 	VariableDeclaration(const Identifier& type, Identifier& id) :
 		type(type), id(id) { }
+	virtual llvm::Value* codeGen(CodeGenContext& context);
+};
+
+class VariableInitial : public Statement {
+public:
+	const Identifier& type;
+	Identifier& id;
+	Expression& expr; 
+	VariableInitial(const Identifier& type, Identifier& id, Expression& expr) :
+		type(type), id(id), expr(expr) { }
 	virtual llvm::Value* codeGen(CodeGenContext& context);
 };
 

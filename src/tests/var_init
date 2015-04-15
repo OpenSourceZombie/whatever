@@ -1,0 +1,5 @@
+set x : int @ 12 !
+
+set y : double @ 28.4 ! 
+
+set z : int @ 12 ! 

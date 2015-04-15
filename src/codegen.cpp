@@ -103,5 +103,14 @@ Value* VariableAssignment::codeGen(CodeGenContext& context)
     }
     return new StoreInst(rhs.codeGen(context), context.locals()[lhs.name], false, context.currentBlock());
 }
+Value* VariableInitial::codeGen(CodeGenContext& context)
+{
+    std::cout << "Creating variable Initialization" << type.name << " " << id.name << endl;
+    AllocaInst *alloc = new AllocaInst(typeOf(type), id.name.c_str(), context.currentBlock());
+    context.locals()[id.name] = alloc;
+    VariableAssignment assn(id, expr);
+    assn.codeGen(context);
+    return alloc;
+}
 
 

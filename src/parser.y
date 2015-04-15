@@ -17,6 +17,7 @@
 	Identifier *ident;
 	VariableDeclaration *var_decl;
 	VariableAssignment *var_ass; 
+	VariableInitial *var_init;
 	std::string *string;
 	int token;
 }
@@ -29,7 +30,7 @@
 
 %type <ident> ident
 %type <block> root stmts
-%type <stmt> stmt var_decl var_ass
+%type <stmt> stmt var_decl var_ass var_init
 %type <expr> num
 
 %start root
@@ -45,15 +46,22 @@ stmts : stmt TEXCL { $$ = new Block(); $$->statements.push_back($<stmt>1); }
 
 stmt : var_decl
 	 | var_ass 
+	 | var_init
      ;
 
 var_decl : TSET ident TTYPE ident  { $$ = new VariableDeclaration(*$4, *$2); }
 		 ;
+
 var_ass : ident TASS num { $$ = new VariableAssignment(*$<ident>1, *$3) } 
 		;
+
+var_init : TSET ident TTYPE ident TASS num { $$ = new VariableInitial(*$4, *$2, *$6)}
+		 ;
+
 ident : TIDENTIFIER { $$ = new Identifier(*$1); delete $1; }
 	  ;
+
 num : TINTEGER { $$ = new Integer(atol($1->c_str())); delete $1 } //convert the current value "str" to "int"
-	| TDOUBLE { $$ = new Double(atof($1->c_str())); delete $1 } //same as the last one but to double 
+	| TDOUBLE { $$ = new Double(atof($1->c_str())); delete $1 } //same as the last one but to double a
 	;
 %%
