@@ -17,6 +17,7 @@ Simple compiler for a toy language using llvm framework
 * ~~Variables declaration.~~
 * ~~Variables assignment.~~
 * ~~Variables initialization.~~
+* ~~Loops.~~
 * Mathematical Expressions.
 * Add a builtin print function ex. echo/print.
 * Functions.

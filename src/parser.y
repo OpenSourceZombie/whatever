@@ -18,6 +18,8 @@
 	VariableDeclaration *var_decl;
 	VariableAssignment *var_ass; 
 	VariableInitial *var_init;
+	Integer *ints;
+	Double *doubles;
 	Loop *loop;
 	std::string *string;
 	int token;
@@ -29,10 +31,12 @@
 %token <token> TLC TRC TLB TRB 
 /* attach syntax to semantics*/ 
 
-%type <expr> num
+%type <ints> ints
+%type <doubles> doubles
 %type <ident> ident
 %type <block> root stmts
 %type <stmt> stmt var_decl var_ass var_init loop
+%type <expr> num
 %start root
 
 %%
@@ -59,12 +63,17 @@ var_ass : ident TASS num { $$ = new VariableAssignment(*$<ident>1, *$3) }
 var_init : TSET ident TTYPE ident TASS num { $$ = new VariableInitial(*$4, *$2, *$6)}
 		 ;
 
-loop : TLOOP TLB num TRB TLC stmts TRC {$$ = new Loop(*$3,*$6)}
+loop : TLOOP TLB ints TRB TLC stmts TRC {$$ = new Loop(*$3,*$6)}
 	 ;
 ident : TIDENTIFIER { $$ = new Identifier(*$1); delete $1; }
 	  ;
-
-num : TINTEGER { $$ = new Integer(atol($1->c_str())); delete $1 } //convert the current value "str" to "int"
-	| TDOUBLE { $$ = new Double(atof($1->c_str())); delete $1 } //same as the last one but to double a
+num : ints | doubles
 	;
+
+ints : TINTEGER { $$ = new Integer(atol($1->c_str())); delete $1 } //convert the current value "str" to "int" 
+	;
+
+doubles : TDOUBLE { $$ = new Double(atof($1->c_str())); delete $1 } //same as the last one but to double 
+	;
+
 %%
