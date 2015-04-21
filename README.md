@@ -30,6 +30,13 @@ set x : int !  //variable declaration example
 x @ 12 ! //variable assignment example 
 
 set x : int @ 12 ! //variable initialization 
+
+loop [12]{  //loop 120 times 
+
+	loop[10]{
+		x @ = 11!
+	}!
+}!
 ```
 ## Requirements ##
 1. flex
