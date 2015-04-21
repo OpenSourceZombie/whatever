@@ -72,6 +72,16 @@ public:
 		Identifier& lhs;
 		Expression&  rhs;
 		VariableAssignment(Identifier& lhs, Expression& rhs) :
-			lhs(lhs), rhs(rhs) {  }
+			lhs(lhs), rhs(rhs) { }
 		virtual llvm::Value* codeGen(CodeGenContext& context);
+};
+
+class Loop : public Statement {
+public: 
+		Integer& num;
+		Block& block;
+		Loop(Integer& num, Block& block) :
+			num(num), block(block) {}
+		virtual llvm::Value* codeGen(CodeGenContext& context);
+
 };

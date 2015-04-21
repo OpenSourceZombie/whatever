@@ -18,19 +18,20 @@
 	VariableDeclaration *var_decl;
 	VariableAssignment *var_ass; 
 	VariableInitial *var_init;
+	Loop *loop;
 	std::string *string;
 	int token;
 }
 
 /* Terminals */
 %token <string> TIDENTIFIER TINTEGER TDOUBLE
-%token <token> TEXCL TTYPE TEQUAL TSET TASS
-
+%token <token> TEXCL TTYPE TEQUAL TSET TASS TLOOP
+%token <token> TLC TRC TLB TRB 
 /* attach syntax to semantics*/ 
 
 %type <ident> ident
 %type <block> root stmts
-%type <stmt> stmt var_decl var_ass var_init
+%type <stmt> stmt var_decl var_ass var_init loop
 %type <expr> num
 
 %start root
@@ -47,6 +48,7 @@ stmts : stmt TEXCL { $$ = new Block(); $$->statements.push_back($<stmt>1); }
 stmt : var_decl
 	 | var_ass 
 	 | var_init
+	 | loop
      ;
 
 var_decl : TSET ident TTYPE ident  { $$ = new VariableDeclaration(*$4, *$2); }
@@ -58,6 +60,8 @@ var_ass : ident TASS num { $$ = new VariableAssignment(*$<ident>1, *$3) }
 var_init : TSET ident TTYPE ident TASS num { $$ = new VariableInitial(*$4, *$2, *$6)}
 		 ;
 
+loop : TLOOP TLB num TRB TLC stmts TRC {$$ = new Loop(*$3, *$6)}
+	 ;
 ident : TIDENTIFIER { $$ = new Identifier(*$1); delete $1; }
 	  ;
 
