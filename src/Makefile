@@ -31,3 +31,7 @@ parser: $(OBJS)
 test: parser 
 	cat tests/int_dec | ./parser
 	cat tests/double_int_dec | ./parser
+	cat tests/loop | ./parser
+	cat tests/var_ass | ./parser
+	cat tests/var_init | ./parser
+

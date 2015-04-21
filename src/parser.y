@@ -29,11 +29,10 @@
 %token <token> TLC TRC TLB TRB 
 /* attach syntax to semantics*/ 
 
+%type <expr> num
 %type <ident> ident
 %type <block> root stmts
 %type <stmt> stmt var_decl var_ass var_init loop
-%type <expr> num
-
 %start root
 
 %%
@@ -60,7 +59,7 @@ var_ass : ident TASS num { $$ = new VariableAssignment(*$<ident>1, *$3) }
 var_init : TSET ident TTYPE ident TASS num { $$ = new VariableInitial(*$4, *$2, *$6)}
 		 ;
 
-loop : TLOOP TLB num TRB TLC stmts TRC {$$ = new Loop(*$3, *$6)}
+loop : TLOOP TLB num TRB TLC stmts TRC {$$ = new Loop(*$3,*$6)}
 	 ;
 ident : TIDENTIFIER { $$ = new Identifier(*$1); delete $1; }
 	  ;

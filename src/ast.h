@@ -20,9 +20,9 @@ class Expression : public Root {
 class Statement : public Root {
 };
 
-class Integer : public Expression {
+class Integer : public Expression{
 public:
-	int value;
+	long long value;
 	Integer(long long value) : value(value) { }
 	virtual llvm::Value* codeGen(CodeGenContext& context);
 };
@@ -81,7 +81,7 @@ public:
 		Integer& num;
 		Block& block;
 		Loop(Integer& num, Block& block) :
-			num(num), block(block) {}
+			num(num), block(block) {  }
 		virtual llvm::Value* codeGen(CodeGenContext& context);
 
 };

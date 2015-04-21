@@ -117,7 +117,7 @@ Value* VariableInitial::codeGen(CodeGenContext& context)
 Value* Loop::codeGen(CodeGenContext& context)
 {
 	std::cout<< "Creating a Loop" <<endl;
-	int count  = num.value;
+	long count  = ((Integer)num).value;
 	//start loop
 	for(count; count > 0 ;count--){
 			std::cout<<"loop num: "<<count <<endl;
